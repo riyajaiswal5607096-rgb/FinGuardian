@@ -1,9 +1,23 @@
 from flask import Flask,render_template,request,redirect
 import sqlite3
+def init_db():
+    conn = sqlite3.connect("expense.db")
+    cur = conn.cursor()
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS expenses (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            amount INTEGER,
+            category TEXT
+        )
+    """)
+    conn.commit()
+    conn.close()
+
 app=Flask(__name__)
+init_db()
 
 def get_db():
-	return sqlite3.connect("expenses.db")
+	return sqlite3.connect("expense.db")
 
 @app.route("/",methods=["GET","POST"])
 def login():
@@ -52,4 +66,5 @@ def dashboard():
 		return render_template("dashboard.html",expenses=data,total=total,ai_message=ai_message,categories=category_data)
 
 if __name__=="__main__":
+
 		app.run()
