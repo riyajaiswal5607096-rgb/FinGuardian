@@ -1,0 +1,55 @@
+<html>
+<head>
+	<title>Dashboard</title>
+	<link rel="stylesheet" href="/static/style.css">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+	<h1>Powered Dashboard</h1>
+	<h2>Total spending:₹{{ total }}</h2>
+	<h3 style="color: yellow; text-align: center;">
+	{{ ai_message }}
+</h3>
+	<table border="1" align="center">
+		<tr>
+			<th>Amount</th>
+			<th>Category</th>
+		</tr>
+		{% for e in expenses %}
+		<tr>
+			<td>{{ e[1] }}</td>
+			<td>{{ e[2] }}</td>
+		</tr>
+		{%endfor%}
+	</table>
+
+	<br>
+
+	
+	<h2>Category-wise Expenses Chart</h2>
+	<canvas id="myChart" width="300"></canvas>
+
+	<script>
+
+		const labels= {{categories.keys()|list}};
+		const values={{categories.values()|list}};
+
+		new Chart(document.getElementById("myChart"),{type:"pie",
+				data:{
+					labels:labels,
+					datasets:[{
+						data:values
+					}]
+				},
+				options:{
+					responsive:true,
+					maintainAspectRatio:false
+				}
+			});
+		</script>
+
+		<br>
+
+	<a href="/add">Add more</a>
+</body>
+</html>

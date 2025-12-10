@@ -1,0 +1,22 @@
+<html>
+<head>
+	<title>Add Expense</title>
+	<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+	<h1>Add Expense</h1>
+
+	<form method="POST">
+		<input type="number" name="amount" placeholder="Enter amount" required>
+		<select name="category" required>
+			<option>Food</option>
+			<option>Travel</option>
+			<option>Shopping</option>
+			<option>Rent</option>
+		</select>
+		<button type="submit">Add</button>
+	</form>
+	<br>
+	<a href="/dashboard">Go to dashboard</a>
+</body>
+</html>
